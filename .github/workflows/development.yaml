@@ -28,6 +28,7 @@ jobs:
             -   name: Build and push base image for this branch
                 run: |
                     echo ${GITHUB_HEAD_REF}
+                    docker build . -f php-fpm/build/Dockerfile --build-arg BASE_IMAGE_PHP="php:7.4.30-fpm-buster" --target dev-base --tag ghcr.io/cbrooney/base-php-fpm-dev:test
 #                    docker build . -f php-fpm/build/Dockerfile --build-arg BASE_IMAGE_PHP="php:7.4.30-fpm-buster" --tag ghcr.io/cbrooney/base-php-fpm-prod:${GITHUB_HEAD_REF}
 #                    docker push ghcr.io/cbrooney/base-php-fpm-prod:${GITHUB_HEAD_REF}
 #                    docker build . -f php-fpm/build/Dockerfile --build-arg BASE_IMAGE_PHP="php:7.4.30-fpm-buster" --tag ghcr.io/cbrooney/base-php-fpm-dev:${GITHUB_HEAD_REF}
