@@ -17,6 +17,10 @@ RUN apt-get update && \
     docker-php-ext-install intl && \
     docker-php-ext-enable intl && \
     docker-php-ext-install opcache && \
+    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+    php composer-setup.php --install-dir=/usr/local/bin --filename=composer && \
+    chmod +x /usr/local/bin/composer && \
+    rm -f composer-setup.php && \
     apt-get -y remove apt-transport-https lsb-release software-properties-common && \
     apt-get -y autoremove && \
     chown www-data:www-data -R /var/www && \
@@ -36,10 +40,6 @@ FROM prod-base as dev-base
 USER root
 
 RUN export XDEBUG_MODE=off && \
-    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
-    php composer-setup.php --install-dir=/usr/local/bin --filename=composer && \
-    chmod +x /usr/local/bin/composer && \
-    rm -f composer-setup.php && \
     echo 'deb [trusted=yes] https://repo.symfony.com/apt/ /' > /etc/apt/sources.list.d/symfony-cli.list && \
     apt-get update && \
     apt-get install -y nano vim less htop git autoconf build-essential wget openssh-client && \
