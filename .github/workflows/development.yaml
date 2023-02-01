@@ -32,4 +32,5 @@ jobs:
                     docker push ghcr.io/cbrooney/base-php-fpm-dev:${GITHUB_HEAD_REF}
                     docker build . -f php-fpm/build/Dockerfile --build-arg BASE_IMAGE_PHP="php:7.4.30-fpm-buster" --target prod-base --tag ghcr.io/cbrooney/base-php-fpm-prod:${GITHUB_HEAD_REF}
                     docker push ghcr.io/cbrooney/base-php-fpm-prod:${GITHUB_HEAD_REF}
-#                    docker push ghcr.io/cbrooney/base-php-fpm-dev:${GITHUB_HEAD_REF} - test
+#                    docker build . -f nginx/build/Dockerfile --build-arg BASE_IMAGE_NGINX="nginx:alpine" --tag ghcr.io/cbrooney/bruni-home-nginx:${GITHUB_HEAD_REF}
+#                    docker push ghcr.io/cbrooney/bruni-home-nginx:${GITHUB_HEAD_REF}
