@@ -4,7 +4,7 @@ on:
         branches:
             - main
 jobs:
-    publish-bruni-image:
+    publish-base-images-latest:
         runs-on: ubuntu-latest
         permissions:
             contents: read
@@ -19,11 +19,15 @@ jobs:
                   username: ${{ github.actor }}
                   password: ${{ secrets.GITHUB_TOKEN }}
 
-            - name: Build bruni home Docker images
+            - name: Build and push latest base images (dev and prod)
               run: |
-                  docker build . -f php-fpm/build/Dockerfile --build-arg BASE_IMAGE_PHP="php:7.4.30-fpm-buster" --target prod-base --tag ghcr.io/cbrooney/base-php-fpm-prod:latest
+                  docker build . -f php-fpm/build/Dockerfile --build-arg BASE_IMAGE_PHP="php:8.0.27-fpm-buster" --target prod-base --tag ghcr.io/cbrooney/base-php-fpm-prod:latest
                   docker push ghcr.io/cbrooney/base-php-fpm-prod:latest
-                  docker build . -f php-fpm/build/Dockerfile --build-arg BASE_IMAGE_PHP="php:7.4.30-fpm-buster" --target dev-base --tag ghcr.io/cbrooney/base-php-fpm-dev:latest
+                  docker build . -f php-fpm/build/Dockerfile --build-arg BASE_IMAGE_PHP="php:8.0.27-fpm-buster" --target dev-base --tag ghcr.io/cbrooney/base-php-fpm-dev:latest
                   docker push ghcr.io/cbrooney/base-php-fpm-dev:latest
+#                  docker build . -f php-fpm/build/Dockerfile --build-arg BASE_IMAGE_PHP="php:8.0.27-fpm-buster" --target prod-base --tag ghcr.io/cbrooney/base-php-fpm-prod:8.0.27
+#                  docker push ghcr.io/cbrooney/base-php-fpm-prod:8.0.27
+#                  docker build . -f php-fpm/build/Dockerfile --build-arg BASE_IMAGE_PHP="php:8.0.27-fpm-buster" --target dev-base --tag ghcr.io/cbrooney/base-php-fpm-dev:8.0.27
+#                  docker push ghcr.io/cbrooney/base-php-fpm-dev:8.0.27
 #                  docker build . -f docker/nginx/build/Dockerfile --build-arg BASE_IMAGE_NGINX="nginx:alpine" --tag ghcr.io/cbrooney/bruni-home-nginx:latest
 #                  docker push ghcr.io/cbrooney/bruni-home-nginx:latest
