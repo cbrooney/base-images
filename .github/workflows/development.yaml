@@ -28,9 +28,9 @@ jobs:
             -   name: Build and push base images for this branch (dev and prod)
                 run: |
                     echo ${GITHUB_HEAD_REF}
-                    docker build . -f php-fpm/build/Dockerfile --build-arg BASE_IMAGE_PHP="php:8.0.27-fpm-buster" --target dev-base --tag ghcr.io/cbrooney/base-php-fpm-dev:${GITHUB_HEAD_REF}
+                    docker build . -f php-fpm/build/Dockerfile --build-arg BASE_IMAGE_PHP="php:8.2.7-fpm-buster" --target dev-base --tag ghcr.io/cbrooney/base-php-fpm-dev:${GITHUB_HEAD_REF}
                     docker push ghcr.io/cbrooney/base-php-fpm-dev:${GITHUB_HEAD_REF}
-                    docker build . -f php-fpm/build/Dockerfile --build-arg BASE_IMAGE_PHP="php:8.0.27-fpm-buster" --target prod-base --tag ghcr.io/cbrooney/base-php-fpm-prod:${GITHUB_HEAD_REF}
+                    docker build . -f php-fpm/build/Dockerfile --build-arg BASE_IMAGE_PHP="php:8.2.7-fpm-buster" --target prod-base --tag ghcr.io/cbrooney/base-php-fpm-prod:${GITHUB_HEAD_REF}
                     docker push ghcr.io/cbrooney/base-php-fpm-prod:${GITHUB_HEAD_REF}
 #                    docker build . -f php-fpm/build/Dockerfile --build-arg BASE_IMAGE_PHP="php:8.0.27-fpm-buster" --target dev-base --tag ghcr.io/cbrooney/base-php-fpm-dev:8.0.27
 #                    docker push ghcr.io/cbrooney/base-php-fpm-dev:8.0.27
